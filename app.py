@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from flask import Flask, Blueprint, jsonify
+from flask import Flask, Blueprint, jsonify, request
 
 
 bp = Blueprint("app", __name__)
@@ -11,10 +11,11 @@ def get_request():
     return jsonify({"Hello": "World"})
 
 
-@bp.route("/api/v1/hello/<name>", methods=["POST"])
-def post_request(name):
+@bp.route("/api/v1/hello", methods=["POST"])
+def post_request():
     """Return the JSON payload in the response"""
-    return "<h1>Hello, %s!</h1>" % name
+    data = request.get_json()
+    return jsonify(data)
 
 
 def create_app():
@@ -24,4 +25,4 @@ def create_app():
 
 
 if __name__ == "__main__":
-    bp.run(debug=True)
+    bp.run()

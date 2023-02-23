@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import json
 import pytest
 from app import create_app
 
@@ -21,18 +22,22 @@ def test_get_request(client):
     Then a JSON response of hello world is returned
     """
     response = client.get("/api/v1/hello")
-    expected_response = '{"Hello":"World"}'
+    expected_response = {"Hello": "World"}
     assert response.status_code == 200
-    assert expected_response.encode() in response.data
+    assert json.dumps(expected_response) == json.dumps(json.loads(response.data))
 
 
 def test_post_request(client):
     """
     Given a Flask app
     When a POST request is sent to the hello endpoint
-    Then an HTML response of greeting the requester is returned
+    Then a JSON response of the request payload is returned
     """
-    response = client.post("/api/v1/hello/pytest")
-    expected_response = "<h1>Hello, pytest!</h1>"
+    expected_response = {"Hello": "pytest"}
+    response = client.post(
+        "/api/v1/hello",
+        data=json.dumps(expected_response),
+        headers={"Content-Type": "application/json"},
+    )
     assert response.status_code == 200
-    assert expected_response.encode() in response.data
+    assert json.dumps(expected_response) == json.dumps(json.loads(response.data))

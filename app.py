@@ -11,10 +11,11 @@ def get_request():
     return jsonify({"Hello": "World"})
 
 
-@bp.route("/api/v1/hello/<name>", methods=["POST"])
-def post_request(name):
-    """Return the payload in the response"""
-    return "<h1>Hello, %s!</h1>" % name
+@bp.route("/api/v1/hello", methods=["POST"])
+def post_request():
+    """Return the JSON payload in the response"""
+    data = request.get_json()
+    return jsonify(data)
 
 
 def create_app():

@@ -6,7 +6,7 @@ Handy for testing CI pipelines.
 
 ## Requirements
 
-Python 3.6+
+Python 3.9+
 
 ## Setup
 
@@ -24,9 +24,6 @@ $ flask run
 $ curl http://localhost:5000/api/v1/hello
 {"Hello":"World"}
 
-$ curl -X POST http://localhost:5000/api/v1/hello \
--H 'Content-Type: application/json' -d '{\"Good\": \"Morning\"}'
-{
-  "Good": "Morning"
-}
+$ curl -X POST http://localhost:5000/api/v1/hello/Roy
+<h1>Hello, Roy!</h1>
 ```

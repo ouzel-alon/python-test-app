@@ -13,7 +13,7 @@ def get_request():
 
 @bp.route("/api/v1/hello/<name>", methods=["POST"])
 def post_request(name):
-    """Return the JSON payload in the response"""
+    """Return the payload in the response"""
     return "<h1>Hello, %s!</h1>" % name
 
 

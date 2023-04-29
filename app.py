@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from flask import Flask, Blueprint, jsonify
+from flask import Flask, Blueprint, jsonify, request
 
 
 bp = Blueprint("app", __name__)
@@ -24,4 +24,4 @@ def create_app():
 
 
 if __name__ == "__main__":
-    bp.run(debug=True)
+    bp.run()
